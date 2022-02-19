@@ -48,7 +48,7 @@ Shader "Unlit/PositionPanel"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                const uint numDigits = 5;
+                const uint numDigits = 4;
                 const uint rows = 3;
                 const uint cols = numDigits+1;
                 float3 worldPos = mul(unity_ObjectToWorld, float4(0,0,0,1));
