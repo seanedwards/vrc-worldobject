@@ -25,7 +25,7 @@ MonoBehaviour:
     valueType: 1
     saved: 0
     defaultValue: 0
-  - name: WorldRot
+  - name: WorldR
     valueType: 1
     saved: 0
     defaultValue: 0
