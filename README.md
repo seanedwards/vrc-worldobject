@@ -41,6 +41,8 @@ Pull requests are welcome. Contributors will be listed below.
 
 `Goat#5718` aka [Oli__](https://vrchat.com/home/user/usr_d9a5fde5-9a01-4623-b868-1182d4434d35)
 
+Major credit goes to VRLabs for the development of the original [World Constraint](https://vrlabs.dev/item/world-constraint) on which this project builds.
+
 ## TODO
 
 Because no self-respecting project is ever complete.
