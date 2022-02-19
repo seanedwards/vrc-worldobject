@@ -33,7 +33,6 @@ These are just my original notes on how to accomplish this. It probably needs to
     * Now, your animation parameters (which are network synced) literally set the exact coordinates for the object (+/- 1km in any direction from the origin). You can use OSC to set those parameters directly.
     * You can write down these coordinates, to restore stuff like stages to an exact position in the world.
 
-
 ## Contributing
 
 Pull requests are welcome. Contributors will be listed below.
@@ -41,6 +40,7 @@ Pull requests are welcome. Contributors will be listed below.
 ### Contributors
 
 `Goat#5718` aka [Oli__](https://vrchat.com/home/user/usr_d9a5fde5-9a01-4623-b868-1182d4434d35)
+
 ## TODO
 
 Because no self-respecting project is ever complete.
