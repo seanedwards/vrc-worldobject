@@ -13,15 +13,27 @@ MonoBehaviour:
   m_Name: WorldObjectParameters
   m_EditorClassIdentifier: 
   parameters:
-  - name: WorldX
+  - name: WorldXCoarse
     valueType: 1
     saved: 0
     defaultValue: 0
-  - name: WorldY
+  - name: WorldXFine
     valueType: 1
     saved: 0
     defaultValue: 0
-  - name: WorldZ
+  - name: WorldYCoarse
+    valueType: 1
+    saved: 0
+    defaultValue: 0
+  - name: WorldYFine
+    valueType: 1
+    saved: 0
+    defaultValue: 0
+  - name: WorldZCoarse
+    valueType: 1
+    saved: 0
+    defaultValue: 0
+  - name: WorldZFine
     valueType: 1
     saved: 0
     defaultValue: 0

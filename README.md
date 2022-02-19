@@ -5,7 +5,7 @@
 This is a very early prototype. Do not expect a one-click experience yet. Please read the installation instructions carefully.
 At this point, nothing in here is so complex that you couldn't just rebuild it yourself, but this repository is offered as an example.
 
-If you encounter any issues, feel free to open a message here, or message me (`Goat#5718`) on Discord.
+If you encounter any issues, feel free to open an issue or pull request here, or message me (`Goat#5718`) on Discord.
 
 ## Installation
 
@@ -13,7 +13,7 @@ If you encounter any issues, feel free to open a message here, or message me (`G
 2. Assign the `WorldObjectParameters` expression parameters to your avatar descriptor, or create similar parameters in your own expression parameters.
 3. Assign the `FxLayerController` animation controller to your avatar descriptor, or create similar layers in your own Fx layer controller.
 4. Send OSC messages to control the `WorldX` `WorldY` `WorldZ` and `WorldR` parameters.
-   * X, Y, Z are in a range of -1.0 to 1.0, representing +/- 1km from the world origin.
+   * X, Y, Z messages should be in a range from -1.0 to 1.0, representing +/- 1km from the world origin.
    * Rotation is sent in a range from 0.0 to 1.0, representing 0 to 360 degrees of rotation along the Y axis.
 
 ## Methodology

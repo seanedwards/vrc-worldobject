@@ -114,7 +114,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: HandTrailsRadius
     m_Mirror: 0
-  m_BlendParameter: WorldZ
+  m_BlendParameter: WorldZCoarse
   m_BlendParameterY: HandTrailsRadius
   m_MinThreshold: -1
   m_MaxThreshold: 1
@@ -279,7 +279,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: HandTrailsRadius
     m_Mirror: 0
-  m_BlendParameter: WorldY
+  m_BlendParameter: WorldYCoarse
   m_BlendParameterY: HandTrailsRadius
   m_MinThreshold: -1
   m_MaxThreshold: 1
@@ -466,19 +466,37 @@ AnimatorController:
   m_Name: FxLayerController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: WorldX
+  - m_Name: WorldXCoarse
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: WorldY
+  - m_Name: WorldXFine
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: WorldZ
+  - m_Name: WorldYCoarse
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: WorldYFine
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: WorldZCoarse
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: WorldZFine
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1154,7 +1172,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: HandTrailsRadius
     m_Mirror: 0
-  m_BlendParameter: WorldX
+  m_BlendParameter: WorldXCoarse
   m_BlendParameterY: HandTrailsRadius
   m_MinThreshold: -1
   m_MaxThreshold: 1

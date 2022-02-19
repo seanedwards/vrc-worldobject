@@ -29,7 +29,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -42,7 +42,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1177613717
+      path: 3201750125
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -86,7 +86,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -105,7 +105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -124,7 +124,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -135,7 +135,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -145,7 +145,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -155,7 +155,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: World Constraint/XMover/YMover/ZMover/Container
+    path: World Constraint/XMover/XFineMover/YMover/YFineMover/ZMover/ZFineMover/Rotater
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
