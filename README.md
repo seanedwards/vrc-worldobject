@@ -3,6 +3,7 @@
 `vrc-worldobject` allows you to create world space props that are network-synced for late joiners.
 
 This is a very early prototype. Do not expect a one-click experience yet. Please read the installation instructions carefully.
+At this point, nothing in here is so complex that you couldn't just rebuild it yourself, but this repository is offered as an example.
 
 If you encounter any issues, feel free to open a message here, or message me (`Goat#5718`) on Discord.
 
@@ -16,6 +17,8 @@ If you encounter any issues, feel free to open a message here, or message me (`G
    * Rotation is sent in a range from 0.0 to 1.0, representing 0 to 360 degrees of rotation along the Y axis.
 
 ## Methodology
+
+These are just my original notes on how to accomplish this. It probably needs to be written up better.
 
     * Create a game object, with a Parent Constraint that's set to the world at 0,0,0. No reset targets. Create 8 animations for it:
       * +1000 X
