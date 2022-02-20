@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: WorldObjectParameters
   m_EditorClassIdentifier: 
   parameters:
+  - name: WorldPosLock
+    valueType: 2
+    saved: 0
+    defaultValue: 0
   - name: WorldAxis0
     valueType: 2
     saved: 0

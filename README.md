@@ -9,7 +9,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 
 ## Prerequisites
 
-* 18 bits of available parameter space (2 floats and 2 bools)
+* 19 bits of available parameter space (2 floats and 3 bools)
 * AudioLink (only if using the `PositionPanel` material/shader)
 * TouchOSC
 
