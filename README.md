@@ -22,6 +22,12 @@ If you encounter any issues, feel free to open an issue or pull request here, or
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
 
+## Troubleshooting
+
+If your WorldObject is not working correctly, before submitting an issue, please open the
+[Unity Editor Test Runner](https://docs.unity3d.com/2017.4/Documentation/Manual/testing-editortestsrunner.html)
+and run the `WorldObjectTests.dll` test suite. Include the **entire** log output in your issue report.
+
 ## Contributing
 
 Pull requests are welcome. Contributors will be listed below.
