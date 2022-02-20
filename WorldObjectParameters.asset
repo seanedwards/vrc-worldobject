@@ -13,31 +13,19 @@ MonoBehaviour:
   m_Name: WorldObjectParameters
   m_EditorClassIdentifier: 
   parameters:
-  - name: WorldXCoarse
+  - name: WorldAxis0
+    valueType: 2
+    saved: 0
+    defaultValue: 0
+  - name: WorldAxis1
+    valueType: 2
+    saved: 0
+    defaultValue: 0
+  - name: WorldPosCoarse
     valueType: 1
     saved: 0
     defaultValue: 0
-  - name: WorldXFine
-    valueType: 1
-    saved: 0
-    defaultValue: 0
-  - name: WorldYCoarse
-    valueType: 1
-    saved: 0
-    defaultValue: 0
-  - name: WorldYFine
-    valueType: 1
-    saved: 0
-    defaultValue: 0
-  - name: WorldZCoarse
-    valueType: 1
-    saved: 0
-    defaultValue: 0
-  - name: WorldZFine
-    valueType: 1
-    saved: 0
-    defaultValue: 0
-  - name: WorldR
+  - name: WorldPosFine
     valueType: 1
     saved: 0
     defaultValue: 0

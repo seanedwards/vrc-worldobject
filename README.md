@@ -7,6 +7,12 @@ At this point, nothing in here is so complex that you couldn't just rebuild it y
 
 If you encounter any issues, feel free to open an issue or pull request here, or message me (`Goat#5718`) on Discord.
 
+## Prerequisites
+
+* 7 available parameter slots
+* AudioLink (only if using the `PositionPanel` material/shader)
+* TouchOSC
+
 ## Installation
 
 1. Drag the World Constraint prefab under your avatar.
