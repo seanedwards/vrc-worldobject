@@ -7,17 +7,20 @@ using UnityEngine.TestTools;
 using VRC.SDKBase;
 using VRC.SDK3.Avatars.Components;
 using System.Text.RegularExpressions;
+using NUnit.Framework.Interfaces;
+using UnityEngine.SceneManagement;
+using System;
 
 namespace Tests
 {
-    public class WorldObject
+    public class WorldObjectAvatarDiagnostics
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/vrc-worldobject/World Constraint.prefab");
+
 
         [Test]
         public void WorldConstraintPasses()
         {
-
             Assert.AreEqual("World Constraint", prefab.name);
             GameObject testObject;
 
@@ -64,54 +67,155 @@ namespace Tests
         }
 
 
-        [Test]
-        public void WorldObjectControllerPasses()
+        [UnityTest]
+        public IEnumerator WorldObjectAnimationPasses()
         {
-            RuntimeAnimatorController animationController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/vrc-worldobject/WorldObjectController.controller");
-            Assert.AreEqual("WorldObjectController", animationController.name);
-            Assert.AreEqual(15, animationController.animationClips.Length);
+            // In this test we will find the avatar and the World Constraint object underneath it.
+            // Then we will test each animation for the correct position values.
 
-            GameObject avatar = new GameObject("TestAvatar");
-            GameObject worldObject = GameObject.Instantiate(prefab, avatar.transform);
-            
+            yield return new EnterPlayMode();
+
+            VRCAvatarDescriptor avatarDescriptor = GameObject.FindObjectOfType<VRCAvatarDescriptor>();
+            GameObject avatar = avatarDescriptor.gameObject;
+            Assert.IsNotNull(avatar);
+
+            GameObject worldObject = avatar.transform.Find("World Constraint").gameObject;
+            Assert.IsNotNull(worldObject);
+
+            GameObject container = worldObject.transform.Find("Container").gameObject;
+            Assert.IsNotNull(container);
+
+            RuntimeAnimatorController animationController = avatarDescriptor.baseAnimationLayers[4].animatorController;
+
+            int animCount = 0;
 
             foreach (AnimationClip clip in animationController.animationClips)
             {
-                TestContext.Out.WriteLine(clip.name);
                 Match match = Regex.Match(clip.name, "^(X|Y|Z|R)(\\+|-)(\\d+|Fine)?$");
-                Assert.IsTrue(match.Success);
+                if (!match.Success)
+                {
+                    // This is not one of our animations, nothing to test.
+                    continue;
+                }
+                TestContext.Out.WriteLine($"Testing {clip.name}...");
+                animCount++;
                 
-                string axis = match.Groups[0].Value;
-                string sign = match.Groups[1].Value;
-                string qual = match.Groups[2].Value;
+                string axis = match.Groups[1].Value;
+                string sign = match.Groups[2].Value;
+                string qual = match.Groups[3].Value;
 
                 float offset = (qual == "Fine") ? 3.9063f : 1000f;
                 offset = (sign == "-") ? -offset : offset;
 
+                clip.SampleAnimation(avatar, 0);
+
+                Vector3 pos = Vector3.zero;
                 switch (axis)
                 {
                     case "X":
-                        clip.SampleAnimation(avatar, 0);
-                        Assert.AreEqual(new Vector3(offset, 0, 0), worldObject.transform.Find($"X{qual}Mover").position);
+                        pos = new Vector3(offset, 0, 0);
                         break;
                     case "Y":
-                        clip.SampleAnimation(avatar, 0);
-                        Assert.AreEqual(new Vector3(0, offset, 0), worldObject.transform.Find($"Y{qual}Mover").position);
+                        pos = new Vector3(0, offset, 0);
                         break;
                     case "Z":
-                        clip.SampleAnimation(avatar, 0);
-                        Assert.AreEqual(new Vector3(0, 0, offset), worldObject.transform.Find($"Z{qual}Mover").position);
+                        pos = new Vector3(0, 0, offset);
                         break;
 
                     case "R":
                         float r = float.Parse(qual);
 
-                        clip.SampleAnimation(avatar, 0);
-                        Assert.AreEqual(Quaternion.Euler(0, (sign == "-") ? -r : r, 0), worldObject.transform.Find("Rotater").rotation);
+                        float angle = Quaternion.Angle(Quaternion.Euler(0, (sign == "-") ? -r : r, 0), FindDeepChild(worldObject.transform, "Rotater").rotation);
+                        Assert.AreEqual(0 , angle);
                         break;
                 }
-                
+
+                if (axis != "R")
+                {
+                    float dist = Vector3.Distance(pos, FindDeepChild(worldObject.transform, $"{axis}{qual}Mover").position);
+                    Assert.Less(dist, 0.0001);
+                }
+                yield return null; // Check the container position on the next frame
+                //Assert.AreEqual(pos, container.transform.position);
+
             }
+
+            Assert.AreEqual(15, animCount);
+
+            yield return new ExitPlayMode();
+        }
+
+        static Dictionary<string, Tuple<bool, bool>> axisBinary = new Dictionary<string, Tuple<bool, bool>>
+        {
+            { "X", (false, false).ToTuple() },
+            { "Y", (false, true).ToTuple() },
+            { "Z", (true, false).ToTuple() },
+            { "R", (true, true).ToTuple() },
+        };
+
+        [UnityTest]
+        public IEnumerator WorldObjectParameterPasses()
+        {
+            yield return new EnterPlayMode();
+
+            VRCAvatarDescriptor avatarDescriptor = GameObject.FindObjectOfType<VRCAvatarDescriptor>();
+            GameObject avatar = avatarDescriptor.gameObject;
+            Assert.IsNotNull(avatar);
+
+            GameObject worldObject = avatar.transform.Find("World Constraint").gameObject;
+            Assert.IsNotNull(worldObject);
+
+            GameObject container = worldObject.transform.Find("Container").gameObject;
+            Assert.IsNotNull(container);
+
+            RuntimeAnimatorController animationController = avatarDescriptor.baseAnimationLayers[4].animatorController;
+            var animator = avatar.GetComponent<Animator>();
+
+            var worldAxis0 = Array.Find(avatarDescriptor.expressionParameters.parameters, param => param.name == "WorldAxis0");
+            var worldAxis1 = Array.Find(avatarDescriptor.expressionParameters.parameters, param => param.name == "WorldAxis1");
+            var worldAxisLock = Array.Find(avatarDescriptor.expressionParameters.parameters, param => param.name == "WorldAxisLock");
+            var worldPosCoarse = Array.Find(avatarDescriptor.expressionParameters.parameters, param => param.name == "WorldPosCoarse");
+            var worldPosFine = Array.Find(avatarDescriptor.expressionParameters.parameters, param => param.name == "WorldPosFine");
+
+            foreach (var axis in axisBinary.Keys) {
+                Transform moverTransform = FindDeepChild(worldObject.transform, (axis == "R") ? "Rotater" : $"{axis}Mover");
+
+                var binary = axisBinary[axis];
+                animator.SetBool(worldAxis0.name, binary.Item1);
+                animator.SetBool(worldAxis1.name, binary.Item2);
+
+                // Make sure locking works
+                animator.SetBool(worldAxisLock.name, true);
+                animator.SetFloat(worldPosCoarse.name, 1.0f);
+                animator.SetFloat(worldPosFine.name, 1.0f);
+                yield return null;
+
+                Assert.AreEqual(0, Vector3.Distance(Vector3.zero, moverTransform.position));
+                Assert.AreEqual(0, moverTransform.rotation.eulerAngles.y);
+
+                // Now unlock and make sure the coarse position is correct.
+
+                animator.SetFloat(worldPosFine.name, 0.0f);
+                animator.SetBool(worldAxisLock.name, false);
+                yield return null;
+
+                if (axis == "R") {
+                    Assert.AreEqual(180, moverTransform.rotation.eulerAngles.y);
+                }
+                else
+                {
+                    Assert.AreEqual(1000, Vector3.Distance(Vector3.zero, moverTransform.position));
+                }
+
+
+                animator.SetFloat(worldPosCoarse.name, 0.0f);
+                animator.SetFloat(worldPosFine.name, 0.0f);
+                yield return null;
+
+            }
+
+
+            yield return new ExitPlayMode();
         }
 
         [Test]
@@ -122,6 +226,21 @@ namespace Tests
 
 
             // Use the Assert class to test conditions
+        }
+
+
+
+        static Transform FindDeepChild(Transform aParent, string aName)
+        {
+            Queue<Transform> queue = new Queue<Transform>();
+            queue.Enqueue(aParent);
+            while (queue.Count > 0)
+            {
+                var c = queue.Dequeue();
+                if (c.name == aName) return c;
+                foreach (Transform t in c) queue.Enqueue(t);
+            }
+            return null;
         }
     }
 }
