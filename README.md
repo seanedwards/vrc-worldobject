@@ -20,6 +20,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 3. Assign the `FxLayerController` animation controller to your avatar descriptor, or create similar layers in your own Fx layer controller.
 4. Open `WorldObject.tosc` to control your new world object parameters.
    * Don't forget to set up the correct mappings in your JSON config!
+   * Closing TouchOSC will break syncing for late joiners.
 
 ## Contributing
 
