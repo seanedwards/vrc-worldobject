@@ -6,18 +6,17 @@ using UnityEditor;
 using UnityEngine.TestTools;
 using VRC.SDKBase;
 using VRC.SDK3.Avatars.Components;
+using System.Text.RegularExpressions;
 
 namespace Tests
 {
     public class WorldObject
     {
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/vrc-worldobject/World Constraint.prefab");
 
-
-        // A Test behaves as an ordinary method
         [Test]
         public void WorldConstraintPasses()
         {
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/vrc-worldobject/World Constraint.prefab");
 
             Assert.AreEqual("World Constraint", prefab.name);
             GameObject testObject;
@@ -65,18 +64,56 @@ namespace Tests
         }
 
 
-        // A Test behaves as an ordinary method
         [Test]
         public void WorldObjectControllerPasses()
         {
             RuntimeAnimatorController animationController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/vrc-worldobject/WorldObjectController.controller");
             Assert.AreEqual("WorldObjectController", animationController.name);
+            Assert.AreEqual(15, animationController.animationClips.Length);
 
+            GameObject avatar = new GameObject("TestAvatar");
+            GameObject worldObject = GameObject.Instantiate(prefab, avatar.transform);
+            
 
-            // Use the Assert class to test conditions
+            foreach (AnimationClip clip in animationController.animationClips)
+            {
+                TestContext.Out.WriteLine(clip.name);
+                Match match = Regex.Match(clip.name, "^(X|Y|Z|R)(\\+|-)(\\d+|Fine)?$");
+                Assert.IsTrue(match.Success);
+                
+                string axis = match.Groups[0].Value;
+                string sign = match.Groups[1].Value;
+                string qual = match.Groups[2].Value;
+
+                float offset = (qual == "Fine") ? 3.9063f : 1000f;
+                offset = (sign == "-") ? -offset : offset;
+
+                switch (axis)
+                {
+                    case "X":
+                        clip.SampleAnimation(avatar, 0);
+                        Assert.AreEqual(new Vector3(offset, 0, 0), worldObject.transform.Find($"X{qual}Mover").position);
+                        break;
+                    case "Y":
+                        clip.SampleAnimation(avatar, 0);
+                        Assert.AreEqual(new Vector3(0, offset, 0), worldObject.transform.Find($"Y{qual}Mover").position);
+                        break;
+                    case "Z":
+                        clip.SampleAnimation(avatar, 0);
+                        Assert.AreEqual(new Vector3(0, 0, offset), worldObject.transform.Find($"Z{qual}Mover").position);
+                        break;
+
+                    case "R":
+                        float r = float.Parse(qual);
+
+                        clip.SampleAnimation(avatar, 0);
+                        Assert.AreEqual(Quaternion.Euler(0, (sign == "-") ? -r : r, 0), worldObject.transform.Find("Rotater").rotation);
+                        break;
+                }
+                
+            }
         }
 
-        // A Test behaves as an ordinary method
         [Test]
         public void WorldObjectParametersPasses()
         {
