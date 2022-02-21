@@ -46,7 +46,7 @@ When someone joins the world late, their game client will need the information a
 However, we only have, at most, information about one axis loaded into avatar parameters at a given time.
 This means that something on our end needs to be continuously switching and retransmitting the axis values, so that late joiners receive that data quickly.
 
-In the TouchOSC file included in this project, there is code written to continuously cycle through each axis
+In the TouchOSC file included in this project, there is code written to continuously cycle through each axis and keep everyone continuously up to date.
 
 ## The Race Condition
 
