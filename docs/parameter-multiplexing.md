@@ -1,6 +1,6 @@
 # Parameter Multiplexing
 
-`vrc-worldobject` uses two float values, and 3 bool values, to transmit all 4 axes of the worldobject's position. (X, Y, Z, and rotation)
+`vrc-worldobject` uses just two float values, and 3 bool values, to transmit all 4 axes (with 16-bit resolution each!) of the worldobject's position. (X, Y, Z, and rotation)
 This document describes how that's done. Hopefully the information here will be useful to your projects.
 
 I'm calling the technique "parameter multiplexing".
