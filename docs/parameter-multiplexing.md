@@ -97,6 +97,15 @@ Any time we have an inconsistent state, we should always transition to an empty 
 
 ![When the WorldAxisLock bit is true, do nothing at all](images/lockout-state.png)
 
+## Tradeoffs
+
+It's worth mentioning some tradeoffs that this technique has. Nothing comes for free, after all.
+
+1. Your multiplexed parameters will not sync as quickly. There's already a limited rate at which normal parameters update, and trying to jam more data throught the same amount of bandwidth just won't work. Use multiplexed parameters for things that don't have to update that frequently. (Measure update time in seconds, not milliseconds.)
+2. Desyncs will happen if you're not continuously cycling through your multiplexed parameters and refreshing them for late joiners. See the Retransmission for Late Joiners section above for more info. Programming is almost certainly required.
+3. Your animation layers might be a bit more complex.
+4. Don't forget to set the lock bit. Weird things happen when you forget the lock bit. Make yourself a nice reusable function that always sets the lock bit or something.
+
 ## Conclusion and Contrubuting
 
 Thank you for reading this far! I hope some of this was helpful in your projects.
