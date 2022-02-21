@@ -95,6 +95,8 @@ When updating a parameter, the sequence of events should always be:
 Remember that `WorldAxisLock` parameter from the selector bits section earlier? That's our lock bit.
 Any time we have an inconsistent state, we should always transition to an empty state to avoid corrupting anything.
 
+![When the WorldAxisLock bit is true, do nothing at all](images/lockout-state.png)
+
 ## Conclusion and Contrubuting
 
 Thank you for reading this far! I hope some of this was helpful in your projects.
