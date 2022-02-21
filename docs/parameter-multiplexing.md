@@ -101,6 +101,8 @@ Any time we have an inconsistent state, we should always transition to an empty 
 
 Thank you for reading this far! I hope some of this was helpful in your projects.
 
+Thanks also to Razgriz, Lyuma, and Merlin for all the great ideas and information that got this technique to this point.
+
 I would love to hear your comments and suggestions!
 I would ask that if you have a suggestion to make, please open a pull request with specific edits.
 
