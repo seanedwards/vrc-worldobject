@@ -102,9 +102,10 @@ Any time we have an inconsistent state, we should always transition to an empty 
 It's worth mentioning some tradeoffs that this technique has. Nothing comes for free, after all.
 
 1. Your multiplexed parameters will not sync as quickly. There's already a limited rate at which normal parameters update, and trying to jam more data throught the same amount of bandwidth just won't work. Use multiplexed parameters for things that don't have to update that frequently. (Measure update time in seconds, not milliseconds.)
-2. Desyncs will happen if you're not continuously cycling through your multiplexed parameters and refreshing them for late joiners. See the Retransmission for Late Joiners section above for more info. Programming is almost certainly required.
-3. Your animation layers might be a bit more complex.
-4. Don't forget to set the lock bit. Weird things happen when you forget the lock bit. Make yourself a nice reusable function that always sets the lock bit or something.
+2. In fact, the quicker you try to sync your parameters, the higher your chances of sending a network sync in an inconsistent state. (just because your state is inconsistent more often!) Every time you hit that condition, you've basically lost a packet. VRChat network sync happens 5 times per second, so don't retransmit your parameters more often than that.
+3. Desyncs will happen if you're not continuously cycling through your multiplexed parameters and refreshing them for late joiners. See the Retransmission for Late Joiners section above for more info. Programming is almost certainly required.
+4. Your animation layers might be a bit more complex.
+5. Don't forget to set the lock bit. Weird things happen when you forget the lock bit. Make yourself a nice reusable function that always sets the lock bit or something.
 
 ## Conclusion and Contrubuting
 
