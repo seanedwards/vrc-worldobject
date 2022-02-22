@@ -21,12 +21,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 1. Add the `WorldObjectSetup` script to your Avatar.
 2. (Optional) Set the max range of your object. A smaller range will give you more resolution in placement, while a larger range will allow you to place your object farther from the world origin. 1000 (1 kilometer!!) is a good default that will work for most worlds.
 3. Press the "Build Animator" button.
-4. Create the 5 new parameters in your expression parameters list:
-   * `WorldPosCoarse` (Float)
-   * `WorldPosFine` (Float)
-   * `WorldAxis0` (Bool)
-   * `WorldAxis1` (Bool)
-   * `WorldAxisLock` (Bool)
+4. Remove the `WorldObjectSetup` script from your avatar before uploading.
 5. Open `WorldObject.tosc` to control your new world object parameters.
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
