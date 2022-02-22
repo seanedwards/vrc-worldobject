@@ -18,20 +18,15 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 
 **MAKE A BACKUP**
 
-1. Add the `WorldObjectSetup` script to your Avatar.
-2. (Optional) Set the max range of your object. A smaller range will give you more resolution in placement, while a larger range will allow you to place your object farther from the world origin. 1000 (1 kilometer!!) is a good default that will work for most worlds.
-3. Press the "Build Animator" button.
-4. Remove the `WorldObjectSetup` script from your avatar before uploading.
-5. Open `WorldObject.tosc` to control your new world object parameters.
+1. Drag the `WorldObject` prefab into the root of your scene. Then, drag it under the root of your avatar. This will ensure that the WorldObject scale is correct, even if your avatar is scaled.
+2. Add the `WorldObjectSetup` script to your Avatar.
+3. (Optional) Set the max range of your object. A smaller range will give you more resolution in placement, while a larger range will allow you to place your object farther from the world origin. 1000 (1 kilometer!!) is a good default that will work for most worlds.
+4. Press the "Build Animator" button.
+5. Remove the `WorldObjectSetup` script from your avatar before uploading.
+6. Open `WorldObject.tosc` to control your new world object parameters.
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
-
-## Troubleshooting
-
-If your WorldObject is not working correctly, before submitting an issue, please open the
-[Unity Editor Test Runner](https://docs.unity3d.com/2017.4/Documentation/Manual/testing-editortestsrunner.html)
-and run the `WorldObjectTests.dll` test suite. Include the **entire** log output in your issue report.
-
+   
 ## Contributing
 
 Pull requests are welcome. Contributors will be listed below.
