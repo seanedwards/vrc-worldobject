@@ -9,6 +9,7 @@ using VRC.SDK3.Avatars.Components;
 [CustomEditor(typeof(WorldObjectSetup))]
 public class WorldObjectSetupEditor : Editor
 {
+    string range = "1000";
     // Start is called before the first frame update
     public override void OnInspectorGUI()
     {
@@ -18,11 +19,14 @@ public class WorldObjectSetupEditor : Editor
             "The button below will add a few parameters and two new layers to your Fx controller. " +
             "It will also create several animations in your animation controller, which will be used to move your object around. " +
             "Once it's set up, feel free to take a look around. Don't worry about breaking anything. " +
-            "If your setup is broken, just click the button again to reset everything to the correct state.\n\n--Oli__".Trim(), MessageType.None);
+            "If your setup is broken, just click the button again to regenerate everything to the correct state.\n\n" +
+            "--Oli__".Trim(), MessageType.None);
+
+        range = EditorGUILayout.TextField("Maximum range (meters)", range);
 
         if (GUILayout.Button("Build Animator"))
         {
-            GenerateAnimatorLayers(1000.0f);
+            GenerateAnimatorLayers(float.Parse(range));
         }
     }
 
