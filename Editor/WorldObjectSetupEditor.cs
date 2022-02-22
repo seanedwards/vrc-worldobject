@@ -127,9 +127,9 @@ public class WorldObjectSetupEditor : Editor
             if (isFine) { path = $"{path}/{axis}FineMover"; }
 
             if (axis == "R") {
-                range = isFine ? (180.0f / 255.0f) : 180.0f;
+                range = isFine ? 0f : 180f;
                 unityAxis = "Y";
-                propName = "localRotation";
+                propName = "localEulerAngles";
             }
 
             var clipPos = GetOrCreateClip(controller, existingAssets, $"WO_{axis}+{(isFine ? "Fine" : "Coarse")}");
