@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
+using VRC.SDK3.Avatars.ScriptableObjects;
 
 [CustomEditor(typeof(WorldObjectSetup))]
 public class WorldObjectSetupEditor : Editor
@@ -19,8 +20,7 @@ public class WorldObjectSetupEditor : Editor
             "The button below will add a few parameters and two new layers to your Fx controller. " +
             "It will also create several animations in your animation controller, which will be used to move your object around. " +
             "Once it's set up, feel free to take a look around. Don't worry about breaking anything. " +
-            "If your setup is broken, just click the button again to regenerate everything to the correct state.\n\n" +
-            "--Oli__".Trim(), MessageType.None);
+            "If your setup is broken, just click the button again to regenerate everything to the correct state.".Trim(), MessageType.None);
 
         range = EditorGUILayout.TextField("Maximum range (meters)", range);
 
@@ -46,11 +46,11 @@ public class WorldObjectSetupEditor : Editor
 
         AnimatorController fxLayer = avatarDescriptor.baseAnimationLayers[4].animatorController as AnimatorController;
 
-        EnsureParameter(fxLayer, "WorldAxis0", AnimatorControllerParameterType.Bool);
-        EnsureParameter(fxLayer, "WorldAxis1", AnimatorControllerParameterType.Bool);
-        EnsureParameter(fxLayer, "WorldAxisLock", AnimatorControllerParameterType.Bool);
-        EnsureParameter(fxLayer, "WorldPosCoarse", AnimatorControllerParameterType.Float);
-        EnsureParameter(fxLayer, "WorldPosFine", AnimatorControllerParameterType.Float);
+        EnsureParameters(fxLayer, avatarDescriptor.expressionParameters, "WorldAxis0", AnimatorControllerParameterType.Bool);
+        EnsureParameters(fxLayer, avatarDescriptor.expressionParameters, "WorldAxis1", AnimatorControllerParameterType.Bool);
+        EnsureParameters(fxLayer, avatarDescriptor.expressionParameters, "WorldAxisLock", AnimatorControllerParameterType.Bool);
+        EnsureParameters(fxLayer, avatarDescriptor.expressionParameters, "WorldPosCoarse", AnimatorControllerParameterType.Float);
+        EnsureParameters(fxLayer, avatarDescriptor.expressionParameters, "WorldPosFine", AnimatorControllerParameterType.Float);
 
         var coarse = new AnimatorControllerLayer
         {
@@ -75,6 +75,11 @@ public class WorldObjectSetupEditor : Editor
         var fineIdx = Array.FindIndex(fxLayer.layers, layer => layer.name == "WorldSpaceFine");
         if (fineIdx != -1) { fxLayer.RemoveLayer(fineIdx); }
         fxLayer.AddLayer(fine);
+
+        if (avatarDescriptor.expressionParameters.CalcTotalCost() > VRCExpressionParameters.MAX_PARAMETER_COST)
+        {
+            Debug.LogWarning("WorldObject has created additional expression parameters, and now they use too much memory. You will need to delete some.");
+        }
     }
 
     static string[] axes = { "X", "Y", "Z", "R" };
@@ -85,7 +90,7 @@ public class WorldObjectSetupEditor : Editor
             { "Z", (true, false).ToTuple() },
             { "R", (true, true).ToTuple() },
         };
-    const HideFlags embedHideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector;
+    const HideFlags embedHideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable;
     AnimatorStateMachine GenerateStateMachine(AnimatorController controller, bool isFine, float range)
     {
         var existingAssets = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(controller));
@@ -146,8 +151,8 @@ public class WorldObjectSetupEditor : Editor
             var stateTransition = stateMachine.AddAnyStateTransition(axisState);
             stateTransition.duration = 0.0f;
             var axisBits = axisBinary[axis];
-            stateTransition.AddCondition(BoolToConditionMode(axisBits.Item1), 1.0f, "WorldAxis0");
-            stateTransition.AddCondition(BoolToConditionMode(axisBits.Item2), 1.0f, "WorldAxis1");
+            stateTransition.AddCondition(axisBits.Item1 ? AnimatorConditionMode.If : AnimatorConditionMode.IfNot, 1.0f, "WorldAxis0");
+            stateTransition.AddCondition(axisBits.Item2 ? AnimatorConditionMode.If : AnimatorConditionMode.IfNot, 1.0f, "WorldAxis1");
             stateTransition.AddCondition(AnimatorConditionMode.IfNot, 1.0f, "WorldAxisLock");
 
             if (!isFine)
@@ -158,27 +163,45 @@ public class WorldObjectSetupEditor : Editor
         return stateMachine;
     }
 
-    AnimatorConditionMode BoolToConditionMode(bool v)
+    void EnsureParameters(AnimatorController controller, VRCExpressionParameters avatarParams, string paramName, AnimatorControllerParameterType paramType)
     {
-        if (v)
-            return AnimatorConditionMode.If;
-        else
-            return AnimatorConditionMode.IfNot;
-    }
-
-    void EnsureParameter(AnimatorController controller, string paramName, AnimatorControllerParameterType paramType)
-    {
-        var param = Array.FindIndex(controller.parameters, p => p.name == paramName);
-        if (controller.parameters[param].type != paramType)
+        // Set animator parameters
+        var paramIdx = Array.FindIndex(controller.parameters, p => p.name == paramName);
+        if (controller.parameters[paramIdx].type != paramType)
         {
-            controller.RemoveParameter(param);
-            param = -1;
+            controller.RemoveParameter(paramIdx);
+            paramIdx = -1;
         }
 
-        if (param == -1)
+        if (paramIdx == -1)
         {
             controller.AddParameter(paramName, paramType);
         }
+
+        // Set avatar parameters
+        var expParam = avatarParams.FindParameter(paramName);
+        if (expParam == null)
+        {
+            Array.Resize(ref avatarParams.parameters, avatarParams.parameters.Length + 1);
+            expParam = avatarParams.parameters[avatarParams.parameters.Length - 1] = new VRCExpressionParameters.Parameter {
+                name = paramName
+            };
+        }
+
+        switch(paramType)
+        {
+            case AnimatorControllerParameterType.Bool:
+                expParam.valueType = VRCExpressionParameters.ValueType.Bool;
+                break;
+            case AnimatorControllerParameterType.Int:
+                expParam.valueType = VRCExpressionParameters.ValueType.Int;
+                break;
+            case AnimatorControllerParameterType.Float:
+                expParam.valueType = VRCExpressionParameters.ValueType.Float;
+                break;
+        }
+
+        expParam.saved = false;
     }
 
     AnimationClip GetOrCreateClip(AnimatorController controller, UnityEngine.Object[] existingAssets, string name)
