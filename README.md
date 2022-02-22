@@ -12,7 +12,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 * 19 bits of available parameter space (2 floats and 3 bools)
 * AudioLink (only if using the `PositionPanel` material/shader)
 * TouchOSC
-* A custom Fx layer already configured (even if it's empty)
+* A custom Fx layer and expression parameters already configured (even if they're empty)
 
 ## Installation
 
