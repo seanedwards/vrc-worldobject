@@ -12,12 +12,20 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 * 19 bits of available parameter space (2 floats and 3 bools)
 * AudioLink (only if using the `PositionPanel` material/shader)
 * TouchOSC
+* A custom Fx layer already configured (even if it's empty)
 
 ## Installation
 
-1. Drag the World Constraint prefab under your avatar.
-2. Assign the `WorldObjectParameters` expression parameters to your avatar descriptor, or create similar parameters in your own expression parameters.
-3. Assign the `FxLayerController` animation controller to your avatar descriptor, or create similar layers in your own Fx layer controller.
+**MAKE A BACKUP**
+
+1. Add the `WorldObjectSetup` script to your Avatar.
+2. Press the "Build Animator" button.
+3. Create the 5 new parameters in your expression parameters list:
+   * `WorldPosCoarse` (Float)
+   * `WorldPosFine` (Float)
+   * `WorldAxis0` (Bool)
+   * `WorldAxis1` (Bool)
+   * `WorldAxisLock` (Bool)
 4. Open `WorldObject.tosc` to control your new world object parameters.
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
