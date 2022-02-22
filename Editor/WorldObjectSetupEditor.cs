@@ -26,11 +26,11 @@ public class WorldObjectSetupEditor : Editor
 
         if (GUILayout.Button("Build Animator"))
         {
-            GenerateAnimatorLayers(float.Parse(range));
+            GenerateWorldObject(float.Parse(range));
         }
     }
 
-    void GenerateAnimatorLayers(float range)
+    void GenerateWorldObject(float range)
     {
         WorldObjectSetup target = (WorldObjectSetup)this.target;
         GameObject avatar = target.gameObject;
@@ -80,6 +80,13 @@ public class WorldObjectSetupEditor : Editor
         {
             Debug.LogWarning("WorldObject has created additional expression parameters, and now they use too much memory. You will need to delete some.");
         }
+
+        if (avatar.transform.Find("WorldObject") == null)
+        {
+            Debug.LogWarning("WorldObject was not found under the root of your avatar. Don't forget to add it!");
+        }
+
+        Debug.Log("Done! WorldObject is now set up.");
     }
 
     static string[] axes = { "X", "Y", "Z", "R" };
@@ -167,7 +174,7 @@ public class WorldObjectSetupEditor : Editor
     {
         // Set animator parameters
         var paramIdx = Array.FindIndex(controller.parameters, p => p.name == paramName);
-        if (controller.parameters[paramIdx].type != paramType)
+        if (paramIdx != -1 && controller.parameters[paramIdx].type != paramType)
         {
             controller.RemoveParameter(paramIdx);
             paramIdx = -1;
