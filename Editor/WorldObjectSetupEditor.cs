@@ -215,7 +215,7 @@ public class WorldObjectSetupEditor : Editor
     {
         var path = AssetDatabase.GetAssetPath(controller);
 
-        var clip = Array.Find<UnityEngine.Object>(existingAssets, asset => asset.name == name && asset.GetType() == typeof(AnimationClip)) as AnimationClip;
+        var clip = Array.Find<UnityEngine.Object>(existingAssets, asset => asset && asset.name == name && asset.GetType() == typeof(AnimationClip)) as AnimationClip;
         if (clip == null)
         {
             clip = new AnimationClip() { name = name };
