@@ -9,6 +9,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 * 19 bits of available parameter space (2 floats and 3 bools)
 * TouchOSC
 * A custom Fx layer and expression parameters already configured (even if they're empty)
+* 1 material slot
 
 ## Installation
 
