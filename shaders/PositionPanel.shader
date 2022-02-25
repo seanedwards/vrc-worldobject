@@ -20,8 +20,7 @@ Shader "Unlit/PositionPanel"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
-            #include "/Assets/AudioLink/Shaders/AudioLink.cginc"
-            #include "/Assets/AudioLink/Shaders/SmoothPixelFont.cginc"
+            #include "./SmoothPixelFont.cginc"
             
             struct appdata
             {
