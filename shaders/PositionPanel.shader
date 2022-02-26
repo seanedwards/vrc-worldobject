@@ -21,6 +21,8 @@ Shader "Unlit/PositionPanel"
 
             #include "UnityCG.cginc"
             #include "./SmoothPixelFont.cginc"
+
+            #define glsl_mod(x, y) (x - y * floor(x / y))
             
             struct appdata
             {
