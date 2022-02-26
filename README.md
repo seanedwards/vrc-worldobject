@@ -4,7 +4,7 @@
 
 If you encounter any issues, feel free to open an issue or pull request here, or message me (`Goat#5718`) on Discord.
 
-[![Demo video link for vrc-worldobject](https://img.youtube.com/vi/9rUnCouqyPs/0.jpg)](https://www.youtube.com/watch?v=9rUnCouqyPs)
+[Check out the brief demo on YouTube!](https://www.youtube.com/watch?v=9rUnCouqyPs)
 
 ## Prerequisites
 
