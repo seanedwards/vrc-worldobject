@@ -26,7 +26,6 @@ Don't forget to **MAKE A BACKUP**
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
 
-
 ## Change Log
 
 ### 1.0.1
