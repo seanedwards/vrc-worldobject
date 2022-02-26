@@ -13,7 +13,7 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 
 ## Installation
 
-**MAKE A BACKUP**
+Don't forget to **MAKE A BACKUP**
 
 1. Drag the `WorldObject` prefab into the root of your scene. Then, drag it under the root of your avatar. This will ensure that the WorldObject scale is correct, even if your avatar is scaled.
 2. Add the `WorldObjectSetup` script to your Avatar.
@@ -23,7 +23,17 @@ If you encounter any issues, feel free to open an issue or pull request here, or
 6. Open `WorldObject.tosc` to control your new world object parameters.
    * Don't forget to set up the correct mappings in your JSON config!
    * Closing TouchOSC will break syncing for late joiners.
-   
+
+
+## Change Log
+
+### 1.0.1
+
+Bug fixes:
+
+* Hopefully fixes #2 (NullReferenceException when building animator)
+* Fixes PositionPanel compile error
+
 ## Contributing
 
 Pull requests are welcome. Contributors will be listed below.
