@@ -28,6 +28,10 @@ Don't forget to **MAKE A BACKUP**
 
 ## Change Log
 
+### 1.0.2
+
+* Fixes issue where TouchOSC was sending float params, but a default VRC OSC config file would require bool params. TouchOSC will now properly send bools.
+
 ### 1.0.1
 
 Bug fixes:
