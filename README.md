@@ -2,7 +2,7 @@
 
 `vrc-worldobject` allows you to create world space props that are network-synced for late joiners.
 
-If you encounter any issues, feel free to open an issue or pull request here, or message me (`Goat#5718`) on Discord.
+If you encounter any issues, feel free to open an issue or pull request here, or message me (`Oli__#0001`) on Discord.
 
 [Check out the brief demo on YouTube!](https://www.youtube.com/watch?v=9rUnCouqyPs)
 
