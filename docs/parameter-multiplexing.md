@@ -116,4 +116,4 @@ Thanks also to Razgriz, Lyuma, and Merlin for all the great ideas and informatio
 I would love to hear your comments and suggestions!
 I would ask that if you have a suggestion to make, please open a pull request with specific edits.
 
-You can reach me at `Goat#5718` on Discord (though I go by `Oli__` in VRChat and in most VRC-related Discords).
+You can reach me at `Oli__#0001` on Discord (though I go by `Oli__` in VRChat and in most VRC-related Discords).

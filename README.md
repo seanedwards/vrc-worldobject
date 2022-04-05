@@ -2,7 +2,7 @@
 
 `vrc-worldobject` allows you to create world space props that are network-synced for late joiners.
 
-If you encounter any issues, feel free to open an issue or pull request here, or message me (`Goat#5718`) on Discord.
+If you encounter any issues, feel free to open an issue or pull request here, or message me (`Oli__#0001`) on Discord.
 
 [Check out the brief demo on YouTube!](https://www.youtube.com/watch?v=9rUnCouqyPs)
 
@@ -28,6 +28,10 @@ Don't forget to **MAKE A BACKUP**
 
 ## Change Log
 
+### 1.0.2
+
+* Fixes issue where TouchOSC was sending float params, but a default VRC OSC config file would require bool params. TouchOSC will now properly send bools.
+
 ### 1.0.1
 
 Bug fixes:
@@ -41,7 +45,7 @@ Pull requests are welcome. Contributors will be listed below.
 
 ### Contributors
 
-`Goat#5718` aka [Oli__](https://vrchat.com/home/user/usr_d9a5fde5-9a01-4623-b868-1182d4434d35)
+`Oli__#0001` aka [Oli__](https://vrchat.com/home/user/usr_d9a5fde5-9a01-4623-b868-1182d4434d35)
 
 Major credit goes to VRLabs for the development of the original [World Constraint](https://vrlabs.dev/item/world-constraint) on which this project builds.
 
