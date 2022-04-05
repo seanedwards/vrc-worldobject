@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2492228052969041314}
   m_Layer: 0
-  m_Name: ZMover
+  m_Name: ZCoarseMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2492228053434982370}
   m_Layer: 0
-  m_Name: YMover
+  m_Name: YCoarseMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2492228053686399007}
   m_Layer: 0
-  m_Name: XMover
+  m_Name: XCoarseMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1908510212115247566}
   m_Layer: 0
-  m_Name: RMover
+  m_Name: RCoarseMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 6218961694975373067}
   - component: {fileID: 3109876739227727802}
   m_Layer: 0
-  m_Name: World Constraint
+  m_Name: WorldObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

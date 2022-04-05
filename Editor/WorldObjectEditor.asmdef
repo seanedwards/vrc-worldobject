@@ -1,0 +1,22 @@
+{
+    "name": "WorldObject",
+    "references": [
+        "GUID:21dee7794a6343ccbdcd48b92f941953",
+        "GUID:988d3266cc2cb564ba5e331f8c5263c2",
+        "GUID:e666041ee5a455049b3dcf819c8d448d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "VRCSDK3A.dll",
+        "VRCSDKBase.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

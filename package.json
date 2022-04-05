@@ -1,0 +1,12 @@
+{
+  "name": "vrc-worldobject",
+  "version": "1.0.0",
+  "description": "Network-synced world space object for avatars",
+  "documentationUrl": "https://docs.olivr.dev/projects/worldobject",
+  "author": {
+    "name": "Oli__",
+    "url": "https://github.com/seanedwards/vrc-worldobject"
+  },
+  "type": "library",
+  "displayName": "WorldObject"
+}
