@@ -14,7 +14,6 @@ using AnimatorAsCodeFramework.Examples;
 public class WorldObjectSetupEditor : Editor
 {
     private const string SystemName = "WorldObject";
-    static string[] axes = { "X", "Y", "Z", "R" };
 
     WorldObjectSetup my;
     AacFlBase aac;
@@ -52,7 +51,7 @@ public class WorldObjectSetupEditor : Editor
 
     private void Create()
     {
-        WorldObjectSetup my = (WorldObjectSetup)this.target;
+        my = (WorldObjectSetup)this.target;
 
         if (my.avatar.customizeAnimationLayers == false || my.avatar.baseAnimationLayers[4].isDefault == true)
         {
@@ -62,20 +61,10 @@ public class WorldObjectSetupEditor : Editor
         aac = AacV0.Create(new AacConfiguration
         {
             SystemName = SystemName,
-            // In the examples, we consider the avatar to be also the animator root.
             AvatarDescriptor = my.avatar,
-            // You can set the animator root to be different than the avatar descriptor,
-            // if you want to apply an animator to a different avatar without redefining
-            // all of the game object references which were relative to the original avatar.
             AnimatorRoot = my.avatar.transform,
-            // DefaultValueRoot is currently unused in AAC. It is added here preemptively
-            // in order to define an avatar root to sample default values from.
-            // The intent is to allow animators to be created with Write Defaults OFF,
-            // but mimicking the behaviour of Write Defaults ON by automatically
-            // sampling the default value from the scene relative to the transform
-            // defined in DefaultValueRoot.
             DefaultValueRoot = my.avatar.transform,
-            AssetContainer = my.assetContainer,
+            AssetContainer = (AnimatorController)my.assetContainer,
             AssetKey = "WorldObject",
             DefaultsProvider = new AacDefaultsProvider(writeDefaults: false)
         });
