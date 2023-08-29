@@ -1,10 +1,8 @@
 # vrc-worldobject
 
+`vrc-worldobject` is no longer maintained. Check out [WorldSync](https://github.com/JuzoVR/WorldSync) instead!
+
 `vrc-worldobject` allows you to create world space props that are network-synced for late joiners.
-
-If you encounter any issues, feel free to open an issue or pull request here, or message me (`Oli__#0001`) on Discord.
-
-[Check out the brief demo on YouTube!](https://www.youtube.com/watch?v=9rUnCouqyPs)
 
 ## Prerequisites
 
@@ -44,8 +42,6 @@ Bug fixes:
 Pull requests are welcome. Contributors will be listed below.
 
 ### Contributors
-
-`Oli__#0001` aka [Oli__](https://vrchat.com/home/user/usr_d9a5fde5-9a01-4623-b868-1182d4434d35)
 
 Major credit goes to VRLabs for the development of the original [World Constraint](https://vrlabs.dev/item/world-constraint) on which this project builds.
 
